@@ -34,12 +34,13 @@ public class CameraControl : MonoBehaviour {
 		
 		transform.eulerAngles = new Vector3(-rotationX, rotationY, 0.0f);
 
+		/* 
 		if (Input.GetKeyDown(KeyCode.A)) {
 			Debug.LogWarning("Warning");
 		}
 		if (Input.GetKeyDown(KeyCode.B)) {
 			Debug.LogError("Error");
-		}
+		} */
 
 	}
 }
