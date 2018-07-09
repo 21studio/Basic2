@@ -38,13 +38,14 @@ public class PlayerMove : MonoBehaviour {
 		if (Input.GetButtonDown("Jump") && jumpCount < 2) {
 			yVelocity = jumpSpeed;
 			
-			jumpCount ++;			
+			jumpCount ++;
 		}
+		Debug.Log(jumpCount);
 
 		yVelocity += (gravity * Time.deltaTime);
 		moveDirection.y = yVelocity;
 
-		Debug.Log(yVelocity);
+		//Debug.Log(yVelocity);
 
 		characterController.Move(moveDirection * Time.deltaTime);
 		
