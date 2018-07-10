@@ -23,24 +23,22 @@ public class CameraControl : MonoBehaviour {
 		//Debug.Log("rotation X : " + rotationX + " / " + "rotation Y : " + rotationY, gameObject);
 		
 		rotationX = Mathf.Clamp(rotationX, -27f, 27f);
-		
-		/* 
-		if (rotationX > 27) {
-			rotationX = 27;
-		}
-		else if (rotationX < -27) {
-			rotationX = -27;
-		} */
+		 
+		// if (rotationX > 27) {
+		// 	rotationX = 27;
+		// }
+		// else if (rotationX < -27) {
+		// 	rotationX = -27;
+		// }
 		
 		transform.eulerAngles = new Vector3(-rotationX, rotationY, 0.0f);
 
-		/* 
-		if (Input.GetKeyDown(KeyCode.A)) {
-			Debug.LogWarning("Warning");
-		}
-		if (Input.GetKeyDown(KeyCode.B)) {
-			Debug.LogError("Error");
-		} */
+		// if (Input.GetKeyDown(KeyCode.A)) {
+		// 	Debug.LogWarning("Warning");
+		// }
+		// if (Input.GetKeyDown(KeyCode.B)) {
+		// 	Debug.LogError("Error");
+		// }
 
 	}
 }

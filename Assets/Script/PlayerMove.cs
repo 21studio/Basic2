@@ -40,7 +40,7 @@ public class PlayerMove : MonoBehaviour {
 			
 			++jumpCount;
 		}
-		Debug.Log(jumpCount);
+		//Debug.Log(jumpCount);
 
 		yVelocity += (gravity * Time.deltaTime);
 		moveDirection.y = yVelocity;
