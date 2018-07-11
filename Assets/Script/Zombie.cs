@@ -15,6 +15,10 @@ public class Zombie : MonoBehaviour {
     public float rotationSpeed = 10.0f;
     public float attackRange = 2.5f;
 
+    public float attackStateMaxTime = 2.0f;
+
+    public int healthPoint = 5;
+
 	enum ENEMYSTATE {
 		IDLE = 0,
 		MOVE,
@@ -26,7 +30,7 @@ public class Zombie : MonoBehaviour {
 	ENEMYSTATE enemyState = ENEMYSTATE.IDLE;
 
 	void Awake () {
-        InitZombie(); //start
+        InitZombie();
     }
 
     void Start () {
@@ -50,9 +54,12 @@ public class Zombie : MonoBehaviour {
             case ENEMYSTATE.IDLE:
                 {
                     stateTime += Time.deltaTime;
-                    if (stateTime > idleStateMaxTime) {
+                    //Debug.Log("stateTime :" + stateTime);
+                    
+                    if (stateTime > idleStateMaxTime)
+                    {
                         stateTime = 0.0f;
-                        enemyState = ENEMYSTATE.MOVE;
+                        enemyState = ENEMYSTATE.MOVE;                        
                     }
                 }
                 break;
@@ -64,7 +71,8 @@ public class Zombie : MonoBehaviour {
                     float distance = (target.position - transform.position).magnitude;
                     if (distance < attackRange) {
                         enemyState = ENEMYSTATE.ATTACK;
-                    }
+                        stateTime = attackStateMaxTime;
+                    }                    
                     else {
                         Vector3 dir = target.position - transform.position;
                         dir.y = 0.0f;
@@ -76,20 +84,60 @@ public class Zombie : MonoBehaviour {
                 }
                 break;
             case ENEMYSTATE.ATTACK:
-                {
+                {                    
+                    stateTime += Time.deltaTime;
+                    if (stateTime > attackStateMaxTime) {
+                        stateTime = 0.0f;
+                        anim["Attack"].speed = -0.5f;
+                        anim["Attack"].time = anim["Attack"].length;
+                        anim.Play("Attack");
+                    }
 
+                    float distance = Vector3.Distance(target.position, transform.position);
+                    //float distance = (target.position - transform.position).magnitude;
+                    if (distance > attackRange) {
+                        enemyState = ENEMYSTATE.IDLE;
+                    }
                 }
                 break;
             case ENEMYSTATE.DAMAGE:
                 {
+                    healthPoint -= 1;
+                    Debug.Log ("HP : " + healthPoint);
 
+                    AnimationState animState = anim.PlayQueued("Damage", QueueMode.PlayNow);
+                    animState.speed = 2.0f;
+
+                    float animLength = anim["Damage"].length / animState.speed;
+                    CancelInvoke();
+                    Invoke("PlayIdleFromDamage", animLength);
+
+                    stateTime = 0.0f;
+                    enemyState = ENEMYSTATE.MOVE;
+
+                    if(healthPoint <= 0)
+                    enemyState = ENEMYSTATE.DEAD;
                 }
                 break;
             case ENEMYSTATE.DEAD:
                 {
-
+                    //anim.Play("Death");
+                    Destroy(gameObject);
                 }
                 break;
         }
 	}
+
+    void OnCollisionEnter (Collision other) {
+        
+        if (other.gameObject.CompareTag("Ball") == false)
+        //if (other.gameObject.tag != "Ball")
+            return;
+        
+        enemyState = ENEMYSTATE.DAMAGE;
+    }
+
+    void PlayIdleFromDamage() {
+        anim.CrossFade("Idle");
+    }
 }
