@@ -14,13 +14,11 @@ public class PlayerMove : MonoBehaviour {
 
 	float yVelocity = 0.0f;
 	int jumpCount = 0;
-
-	// Use this for initialization
+	
 	void Start () {
 		characterController = GetComponent<CharacterController>();
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		float x = Input.GetAxis("Horizontal");
 		float z = Input.GetAxis("Vertical");
@@ -40,7 +38,6 @@ public class PlayerMove : MonoBehaviour {
 			
 			++jumpCount;
 		}
-		//Debug.Log(jumpCount);
 
 		yVelocity += (gravity * Time.deltaTime);
 		moveDirection.y = yVelocity;

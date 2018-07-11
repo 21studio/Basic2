@@ -8,7 +8,6 @@ public class CameraControl : MonoBehaviour {
 	float rotationX;
 	float rotationY;
 	
-	// Update is called once per frame
 	void Update () {
 		
 		float mouseMoveValueX = Input.GetAxis("Mouse X");
@@ -22,7 +21,7 @@ public class CameraControl : MonoBehaviour {
 		
 		//Debug.Log("rotation X : " + rotationX + " / " + "rotation Y : " + rotationY, gameObject);
 		
-		rotationX = Mathf.Clamp(rotationX, -27f, 27f);
+		rotationX = Mathf.Clamp(rotationX, -90f, 90f);
 		 
 		// if (rotationX > 27) {
 		// 	rotationX = 27;

@@ -10,13 +10,7 @@ public class FireBall : MonoBehaviour {
 	public float upPower = 1.0f;
 
 	public Transform firePosTransform;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (Input.GetButtonDown("Fire1")) {
 			GameObject obj = Instantiate(fireObject) as GameObject;
