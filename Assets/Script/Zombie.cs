@@ -26,7 +26,7 @@ public class Zombie : MonoBehaviour {
 	ENEMYSTATE enemyState = ENEMYSTATE.IDLE;
 
 	void Awake () {
-        InitZombie();
+        InitZombie(); //start
     }
 
     void Start () {
