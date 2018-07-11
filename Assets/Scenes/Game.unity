@@ -260,6 +260,27 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!111 &311384351 stripped
+Animation:
+  m_PrefabParentObject: {fileID: 11100000, guid: be66986effd141b4992d2d78be127139,
+    type: 3}
+  m_PrefabInternal: {fileID: 311384348}
+--- !u!114 &311384353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311384349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624b7a09c399048829943ce431de674f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleStateMaxTime: 2
+  anim: {fileID: 311384351}
+  moveSpeed: 5
+  rotationSpeed: 10
+  attackRange: 2.5
 --- !u!1 &316770294
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,6 +680,10 @@ Prefab:
     - target: {fileID: 100132, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100078, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
