@@ -7,6 +7,7 @@ public class Bomb : MonoBehaviour {
 	public GameObject explosionParticle;
 	public GameObject explosionParticleAir;
 	
+	/* 
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.R)) {
 			GetComponent<Rigidbody>().isKinematic = true;			
@@ -15,7 +16,7 @@ public class Bomb : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.T)) {			
 			GetComponent<Rigidbody>().isKinematic = false;			
 		}
-	}
+	} */
 
 	void OnCollisionEnter (Collision other) {
 		

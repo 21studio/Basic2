@@ -18,8 +18,14 @@ public class Zombie : MonoBehaviour {
     public float attackStateMaxTime = 2.0f;
 
     public int healthPoint = 5;
+  
+    PlayerState playerState;
+
+    public GameObject explosionParticle = null;
+    public GameObject deadObject = null;
 
 	enum ENEMYSTATE {
+        NONE = -1,
 		IDLE = 0,
 		MOVE,
 		ATTACK,
@@ -36,6 +42,9 @@ public class Zombie : MonoBehaviour {
     void Start () {
         target = GameObject.FindWithTag("Player").transform;
         characterController = GetComponent<CharacterController>();
+
+        playerState = target.GetComponent<PlayerState>();
+        
     }
 
     void InitZombie() {
@@ -91,6 +100,8 @@ public class Zombie : MonoBehaviour {
                         anim["Attack"].speed = -0.5f;
                         anim["Attack"].time = anim["Attack"].length;
                         anim.Play("Attack");
+
+                        playerState.DamageByEnemy();
                     }
 
                     float distance = Vector3.Distance(target.position, transform.position);
@@ -120,15 +131,19 @@ public class Zombie : MonoBehaviour {
                 }
                 break;
             case ENEMYSTATE.DEAD:
-                {
-                    //anim.Play("Death");
-                    Destroy(gameObject);
+                {                    
+                    //Destroy(gameObject);
+                    StartCoroutine("DeadProcess");
+                    enemyState = ENEMYSTATE.NONE;
                 }
                 break;
         }
 	}
 
     void OnCollisionEnter (Collision other) {
+
+        if (enemyState == ENEMYSTATE.DEAD || enemyState == ENEMYSTATE.NONE)
+            return;
         
         if (other.gameObject.CompareTag("Ball") == false)
         //if (other.gameObject.tag != "Ball")
@@ -139,5 +154,36 @@ public class Zombie : MonoBehaviour {
 
     void PlayIdleFromDamage() {
         anim.CrossFade("Idle");
+    }
+
+    IEnumerator DeadProcess() {
+        CancelInvoke();
+
+        anim["Death"].speed = 2.0f;
+        anim.Play("Death");
+
+        yield return new WaitForSeconds(anim["Death"].length / 2.0f);
+
+        yield return new WaitForSeconds(1.0f);
+
+        var explosionObj = Instantiate(explosionParticle);
+        Vector3 explosionObjPos = transform.position;
+        explosionObjPos.y = 1.0f;
+        explosionObj.transform.position = explosionObjPos;
+
+        yield return new WaitForSeconds(0.5f);
+
+        var deadObj = Instantiate(deadObject);
+        Vector3 deadObjPos = transform.position;
+        deadObjPos.y = 2.0f;
+        deadObj.transform.position = deadObjPos;
+
+        deadObj.transform.rotation = Random.rotation;
+
+        Rigidbody rb = deadObj.GetComponent<Rigidbody>();
+        rb.velocity = new Vector3(0.0f, Random.Range(2,5), 0.0f);
+        rb.angularVelocity = Vector3.one * Random.Range(1.0f, 10.0f);
+        
+        Destroy(gameObject);
     }
 }

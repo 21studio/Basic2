@@ -1153,6 +1153,8 @@ MonoBehaviour:
   attackRange: 2.5
   attackStateMaxTime: 2
   healthPoint: 5
+  explosionParticle: {fileID: 100004, guid: 98215572d09eebe488faf63d40b0be11, type: 2}
+  deadObject: {fileID: 1000014135240542, guid: 7f2e519f1a8a9a649b305539adcbaf6c, type: 2}
 --- !u!137 &137002521069438072
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
