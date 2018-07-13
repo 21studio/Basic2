@@ -20,7 +20,7 @@ public class CameraShake : MonoBehaviour {
 		}
 		
 		//StopAllCoroutines();
-		coroutine = StartCoroutine(CameraShakeProcess(1.0f, 0.2f));
+		coroutine = StartCoroutine(CameraShakeProcess(0.2f, 0.1f));
 	}
 
 	IEnumerator CameraShakeProcess(float shakeTime, float shakeSense) {

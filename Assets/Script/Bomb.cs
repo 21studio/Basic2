@@ -19,6 +19,8 @@ public class Bomb : MonoBehaviour {
 	} */
 
 	void OnCollisionEnter (Collision other) {
+
+		SoundManager.instance.PlaySFX(SFX.BOMB);
 		
 		if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) {
 			var particleObj = Instantiate(explosionParticle); //as GameObject;

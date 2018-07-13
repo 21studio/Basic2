@@ -15,6 +15,10 @@ public class PlayerMove : MonoBehaviour {
 	float yVelocity = 0.0f;
 	int jumpCount = 0;
 	
+	bool jumped = false;
+	
+	public PlayerAnim playerAnim;
+
 	void Start () {
 		characterController = GetComponent<CharacterController>();
 	}
@@ -23,6 +27,13 @@ public class PlayerMove : MonoBehaviour {
 		float x = Input.GetAxis("Horizontal");
 		float z = Input.GetAxis("Vertical");
 
+		if (x !=0f || z != 0f) {
+			playerAnim.Move();
+		}
+		else {
+			playerAnim.Idle();
+		}
+
 		Vector3 moveDirection = new Vector3(x, 0, z);
 		moveDirection = cameraTransform.TransformDirection(moveDirection);
 		moveDirection *= moveSpeed;
@@ -30,13 +41,24 @@ public class PlayerMove : MonoBehaviour {
 		if (characterController.isGrounded == true) {
 			yVelocity = 0.0f;
 			jumpCount = 0;
+
+			if (jumped == true) {
+				playerAnim.Grounded();				
+			}
+			jumped = false;
+			
 		}
 		//Debug.Log(characterController.isGrounded);
 		
 		if (Input.GetButtonDown("Jump") && jumpCount < 2) {
+			
+			jumped = true;
+
 			yVelocity = jumpSpeed;
 			
 			++jumpCount;
+
+			playerAnim.Jump();
 		}
 
 		yVelocity += (gravity * Time.deltaTime);

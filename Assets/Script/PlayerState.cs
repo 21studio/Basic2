@@ -19,7 +19,9 @@ public class PlayerState : MonoBehaviour {
 	public FireBall fireBall;
 	public CameraControl cameraControl;
 
-	CameraShake cameraShake;	
+	CameraShake cameraShake;
+
+	public PlayerAnim playerAnim;
 
 	int _healthPoint = 5;
 	public int healthPoint {
@@ -71,6 +73,10 @@ public class PlayerState : MonoBehaviour {
 			return;
 
 		--healthPoint;
+
+		playerAnim.Damage();
+		if (healthPoint <= 0)
+			playerAnim.Dead();
 		
 		cameraShake.PlayCameraShake();
 		//healthPoint -= 1;

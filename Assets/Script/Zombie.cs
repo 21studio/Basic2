@@ -35,7 +35,12 @@ public class Zombie : MonoBehaviour {
 
 	ENEMYSTATE enemyState = ENEMYSTATE.IDLE;
 
+    // Awake -> OnEnable -> Start 순서로 호출
 	void Awake () {
+        InitZombie();
+    }
+
+    void OnEnable() {
         InitZombie();
     }
 
@@ -48,6 +53,11 @@ public class Zombie : MonoBehaviour {
     }
 
     void InitZombie() {
+        if (characterController != null)
+            characterController.enabled = true;
+
+        healthPoint = 5;
+        
         enemyState = ENEMYSTATE.IDLE;
         PlayIdleAnim();
     }
@@ -116,6 +126,8 @@ public class Zombie : MonoBehaviour {
                     healthPoint -= 1;
                     Debug.Log ("HP : " + healthPoint);
 
+                    SoundManager.instance.PlaySFX(SFX.DAMAGE);
+
                     AnimationState animState = anim.PlayQueued("Damage", QueueMode.PlayNow);
                     animState.speed = 2.0f;
 
@@ -135,6 +147,8 @@ public class Zombie : MonoBehaviour {
                     //Destroy(gameObject);
                     StartCoroutine("DeadProcess");
                     enemyState = ENEMYSTATE.NONE;
+
+                    ScoreManager.Instance().myScore += 10;
                 }
                 break;
         }
@@ -158,6 +172,7 @@ public class Zombie : MonoBehaviour {
 
     IEnumerator DeadProcess() {
         CancelInvoke();
+        characterController.enabled = false; //
 
         anim["Death"].speed = 2.0f;
         anim.Play("Death");
@@ -183,7 +198,8 @@ public class Zombie : MonoBehaviour {
         Rigidbody rb = deadObj.GetComponent<Rigidbody>();
         rb.velocity = new Vector3(0.0f, Random.Range(2,5), 0.0f);
         rb.angularVelocity = Vector3.one * Random.Range(1.0f, 10.0f);
-        
-        Destroy(gameObject);
+                
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
