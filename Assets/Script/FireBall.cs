@@ -7,7 +7,7 @@ public class FireBall : MonoBehaviour {
 	public Transform cameraTransform;
 	public GameObject fireObject;
 	public float forwardPower = 20.0f;
-	public float upPower = 1.0f;
+	public float upPower = 5.0f;
 
 	public Transform firePosTransform;
 	
@@ -20,11 +20,7 @@ public class FireBall : MonoBehaviour {
 			obj.transform.position = firePosTransform.position;
 			obj.GetComponent<Rigidbody>().velocity = (cameraTransform.forward * forwardPower) + (Vector3.up * upPower);
 			
-			obj.GetComponent<Rigidbody>().AddTorque(rnd, rnd, rnd);
-			//Quaternion rot = Quaternion.Euler(rnd, rnd, rnd);
-			//obj.GetComponent<Rigidbody>().MoveRotation(obj.GetComponent<Rigidbody>().rotation * rot);
-			
-			//Debug.Log(rnd);
+			obj.GetComponent<Rigidbody>().AddTorque(rnd, rnd, rnd);		
 		}
 	}
 }

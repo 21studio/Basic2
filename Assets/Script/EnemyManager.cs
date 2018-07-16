@@ -62,7 +62,6 @@ public class EnemyManager : MonoBehaviour {
 			spawnPos.y = 0.1f;
 
 			enemyObj.transform.position = spawnPos;
-		}
-		
+		}		
 	}
 }

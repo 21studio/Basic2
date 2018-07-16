@@ -172,7 +172,7 @@ public class Zombie : MonoBehaviour {
 
     IEnumerator DeadProcess() {
         CancelInvoke();
-        characterController.enabled = false; //
+        characterController.enabled = false; //죽은 후 충돌처리 여부
 
         anim["Death"].speed = 2.0f;
         anim.Play("Death");

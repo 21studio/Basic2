@@ -186,7 +186,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 316770298}
   fireObject: {fileID: 1059332068297944, guid: fbe3cc3d86d3c41a8a021cd4f2ad4918, type: 2}
   forwardPower: 20
-  upPower: 1
+  upPower: 5
   firePosTransform: {fileID: 1891637395}
 --- !u!114 &234604733
 MonoBehaviour:
@@ -1573,6 +1573,10 @@ Prefab:
     - target: {fileID: 400110, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.0029172862
+      objectReference: {fileID: 0}
+    - target: {fileID: 100080, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
