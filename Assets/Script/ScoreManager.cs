@@ -16,8 +16,31 @@ public class ScoreManager : MonoBehaviour {
 		return _instance;
 	}
 
-	bool gamePause = false;
+	public static bool gamePause = false;
+	
+	public int bestScore { 
+		get;
+		private set;
+	}
 
+	int _myScore = 0;
+
+	public int myScore {
+		get { 
+			return _myScore; 
+		}
+		set {
+			_myScore = value;
+			if (_myScore > bestScore) {
+				bestScore = _myScore;
+				SaveBestScore();
+			}
+		}
+	}
+
+	public Text scoreText;
+	StringBuilder scroeTextBuilder = new StringBuilder();
+	
 	void Start () {
 		if (_instance == null)
 			_instance = instance = this;
@@ -26,14 +49,6 @@ public class ScoreManager : MonoBehaviour {
 
 		LoadBestScore();
 	}
-
-	public int bestScore { 
-		get; 
-		private set; 
-	}
-
-	public Text scoreText;
-	StringBuilder scroeTextBuilder = new StringBuilder();
 	
 	private void Update () {
 		scroeTextBuilder.Length = 0;
@@ -48,21 +63,7 @@ public class ScoreManager : MonoBehaviour {
 			else
 				Time.timeScale = 1.0f;
 		}
-	}
-
-	int _myScore = 0;
-	public int myScore {
-		get { 
-			return _myScore; 
-		}
-		set {
-			_myScore = value;
-			if (_myScore > bestScore) {
-				bestScore = _myScore;
-				SaveBestScore();
-			}
-		}
-	}
+	}	
 
 	void SaveBestScore () {
 		PlayerPrefs.SetInt("Best Score", bestScore);

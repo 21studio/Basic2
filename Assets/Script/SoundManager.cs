@@ -32,10 +32,5 @@ public class SoundManager : MonoBehaviour {
 			audioSource.loop = true;
 			audioSource.Play();
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	}	
 }

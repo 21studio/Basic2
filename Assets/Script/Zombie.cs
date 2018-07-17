@@ -35,6 +35,8 @@ public class Zombie : MonoBehaviour {
 
 	ENEMYSTATE enemyState = ENEMYSTATE.IDLE;
 
+    public int score = 10;
+
     // Awake -> OnEnable -> Start 순서로 호출
 	void Awake () {
         InitZombie();
@@ -148,7 +150,7 @@ public class Zombie : MonoBehaviour {
                     StartCoroutine("DeadProcess");
                     enemyState = ENEMYSTATE.NONE;
 
-                    ScoreManager.Instance().myScore += 10;
+                    ScoreManager.Instance().myScore += score;
                 }
                 break;
         }

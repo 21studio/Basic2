@@ -75,8 +75,10 @@ public class PlayerState : MonoBehaviour {
 		--healthPoint;
 
 		playerAnim.Damage();
-		if (healthPoint <= 0)
-			playerAnim.Dead();
+
+		if (healthPoint <= 0) {
+			playerAnim.Dead();			
+		}			
 		
 		cameraShake.PlayCameraShake();
 		//healthPoint -= 1;

@@ -12,6 +12,11 @@ public class FireBall : MonoBehaviour {
 	public Transform firePosTransform;
 	
 	void Update () {
+		
+		if (ScoreManager.gamePause) {
+			return;
+		}
+		
 		if (Input.GetButtonDown("Fire1")) {
 			GameObject obj = Instantiate(fireObject) as GameObject;
 

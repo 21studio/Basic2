@@ -29,14 +29,4 @@ public class PlayerAnim : MonoBehaviour {
 	public void Dead() {
 		anim.SetTrigger("dead");
 	}
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
